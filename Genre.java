@@ -1,4 +1,3 @@
-interface State{
+interface Genre{
     public getList();
-
 }
