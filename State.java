@@ -1,3 +1,4 @@
-class State{
+interface State{
     
+
 }
