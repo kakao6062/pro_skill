@@ -6,7 +6,7 @@ public class NoAccess implements CheckAccess{
     }
 
     //状態変更のメソッド
-    public void changeState(String state){
+    public void update(String state){
         printMsg();
     }
 
