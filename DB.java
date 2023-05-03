@@ -1,5 +1,109 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 class DB {
+    //接続用メンバ
+    public static Connection con = null;
+
+    /*
+     * データベースに接続し使えるようにする
+     * はじめに使用する必要あり
+     */
+    public static void initDB() {
+        
+        //JDBCドライバロード
+        try{
+            Class.forName("org.sqlite.JDBC");
+        }catch(ClassNotFoundException e){
+            throw new IllegalStateException("ドライバのロードに失敗しました. ");
+        }
+
+        //データベース接続 & userTable作成
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
+            Statement stm = con.createStatement();
+            stm.executeUpdate("CREATE TABLE IF NOT EXISTS user"
+                             +"("
+                             +"   name TEXT"
+                             +",  id   INT"
+                             +",  pass TEXT"
+                             +")");
+            stm.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * tableNameという名前のtableを作る
+     */
+    public static void createTable(String tableName) {
+        try{
+            //インスタンス生成
+            Statement stm = con.createStatement();
+
+            //命令をstring変数にべた書き
+            String sql = "CREATE TABLE IF NOT EXISTS " + tableName
+                        +"("
+                        +"   id    INT"
+                        +",  tile  INT"
+                        +",  genre TEXT"
+                        +",  state TEXT"
+                        +")";
+            
+            //実行
+            stm.executeUpdate(sql);
+
+            //インスタンスリソース解放
+            stm.close();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
+    /*
+     * tableNameにvaluesの要素を挿入
+     * valuesの長さが3か4でない場合はerrorとする
+     */
+    public static void insertTable(String tableName, ArrayList<String> data) {
+        int data_length = data.size();
+        
+        if (data_length != 2 || data_length != 4){
+            System.out.println("Error : 要素の長さが指定の長さではありません.");
+            return;
+        }
+
+        try{
+            String data_value = "";
+
+            if (data_length == 2) {
+                data_value = "'" + data.get(0) +"'" + ", " + "CONVERT(INT, CONVERT(VARBINARY(4), NEWID)), " + "'" + data.get(1) + "'";
+            }else {
+                data_value = data.get(0) + ", " + "'" + data.get(1) + "', " + "'" + data.get(2) + "', "+ "'" + data.get(3) + "'";
+            }
+
+            Statement stm = con.createStatement();
+            String sql = "INSERT INTO " + tableName + " values(" + data_value + ");";
+            stm.executeUpdate(sql);
+            stm.close();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<String> getData(String tableName, String field){
+        try{
+            Statement stm = con.createStatement();
+            String sql = "SELECT " + field + " from " + tableName;
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                
+            }
+        }catch(SQLException e) {
+
+        }
+        ArrayList<String> rt = new ArrayList<>();
+        return rt;
+    }
 }
