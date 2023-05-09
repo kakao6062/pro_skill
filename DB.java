@@ -157,6 +157,9 @@ public final class DB {
                 String data_tmp[] = {rs.getString(1), rs.getString(2), rs.getString(3)};
                 rt.add(data_tmp);
             }
+
+            stm.close();
+            con.close();
         }catch(SQLException e) {
             e.printStackTrace();
             System.exit(0);
