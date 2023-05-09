@@ -6,7 +6,7 @@ public class NoAccessProcess implements Process{
     }
 
     //状態変更のメソッド
-    public void update(String state){
+    public void update(String title, String state){
         printMsg();
     }
 
