@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public final class DB {
 
@@ -38,7 +39,7 @@ public final class DB {
             if (tableName.equals("user")) {
                 sql = "CREATE TABLE IF NOT EXISTS " + tableName
                             +"("
-                            +"   id   INT"
+                            +"   id   TEXT"
                             +",  name TEXT"
                             +",  pass TEXT"
                             +")";
@@ -79,13 +80,14 @@ public final class DB {
             String data_value;
 
             if (data_length == 2) {
-                data_value = String.format("CONVERT(INT, CONVERT(VARBINARY(4), NEWID)), '%s', '%s'", data.get(0), data.get(1));
+                data_value = String.format("'%s', '%s', '%s'", UUID.randomUUID().toString(), data.get(0), data.get(1));
             }else {
                 data_value = String.format("'%s', '%s', '%s'", data.get(0), data.get(1), data.get(2));
             }
 
             Statement stm = con.createStatement();
             String sql = String.format("insert into '%s' values(%s);", tableName, data_value);
+
             stm.executeUpdate(sql);
             stm.close();
             con.close();
@@ -103,7 +105,6 @@ public final class DB {
         try {
             Statement stm = con.createStatement();
             String sql = String.format("update %s set %s = '%s' where %s = '%s';", table, column, after, text, value);
-            System.out.println(sql);
             stm.executeUpdate(sql);
 
             stm.close();
