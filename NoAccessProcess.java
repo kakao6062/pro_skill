@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class NoAccess implements CheckAccess{
+public class NoAccessProcess implements Process{
     void printMsg(){
         System.out.println("アクセス権がありません");
     }

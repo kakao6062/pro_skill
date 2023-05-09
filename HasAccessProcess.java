@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.sql.*;
 
-public class HasAccess implements CheckAccess{
+public class HasAccessProcess implements Process{
 
     //状態変更のメソッド
     public void update(String state){
