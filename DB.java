@@ -80,7 +80,45 @@ public final class DB {
             String sql = "INSERT INTO " + tableName + " values(" + data_value + ");";
             stm.executeUpdate(sql);
             stm.close();
+            con.close();
         }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * tableのtextがvalueである行のcolumnの値をafterに変更
+     */
+    public static final void updateData(String table, String column, String after, String text, String value){
+        Connection con = getCon();
+
+        try {
+            Statement stm = con.createStatement();
+            String sql = "update " + table + " set " + column + " = '" + after + "' where " + text + " = '"+ value + "';";
+            System.out.println(sql);
+            stm.executeUpdate(sql);
+
+            stm.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * tableを削除
+     */
+    public static void deleteTable(String table) {
+        Connection con = getCon();
+
+        try{
+            Statement stm = con.createStatement();
+            String sql = "drop table if exists '" + table + "';";
+            stm.executeUpdate(sql);
+
+            stm.close();
+            con.close();
+        }catch(SQLException e){
             e.printStackTrace();
         }
     }
