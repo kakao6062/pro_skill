@@ -6,11 +6,7 @@ public class NoAccessProcess implements Process{
     }
 
     //状態変更のメソッド
-<<<<<<< HEAD
     public void update(String state){
-=======
-    public void update(String title, String state){
->>>>>>> cahe-2
         printMsg();
     }
 

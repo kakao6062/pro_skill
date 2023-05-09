@@ -1,14 +1,9 @@
-import java.util.*;
-<<<<<<< HEAD
+import java.util.ArrayList;
 
-public class CheckAccess{
-=======
-import java.sql.*;
+interface CheckAccess{
+    public void changeState(String state);
 
-public class CheckAccess{
-    public boolean check(String username, String pass){
-        ArrayList<String> list = DB.getData(username, pass);
-    }
->>>>>>> cahe-2
-    
+    public void addColumn(String title, String state);
+
+    public ArrayList<String> getList(String state);
 }
