@@ -5,10 +5,7 @@ public final class DB {
 
     private DB() {}
 
-    /**
-     * tableNameという名前のtableを作る
-     */
-    public static final void createTable(String tableName) {
+    public static final Connection getCon() {
         Connection con = null;
         //JDBCドライバロード
         try{
@@ -23,6 +20,14 @@ public final class DB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return con;
+    }
+
+    /**
+     * tableNameという名前のtableを作る
+     */
+    public static final void createTable(String tableName) {
+        Connection con = getCon();
 
         try{
             //インスタンス生成
@@ -42,6 +47,7 @@ public final class DB {
 
             //インスタンスリソース解放
             stm.close();
+            con.close();
         }catch(SQLException e) {
             e.printStackTrace();
         }
@@ -52,20 +58,7 @@ public final class DB {
      * valuesの長さが3か4でない場合はerrorとする
      */
     public static final void insertTable(String tableName, ArrayList<String> data) {
-        Connection con = null;
-        //JDBCドライバロード
-        try{
-            Class.forName("org.sqlite.JDBC");
-        }catch(ClassNotFoundException e){
-            throw new IllegalStateException("ドライバのロードに失敗しました. ");
-        }
-
-        //データベース接続 & userTable作成
-        try {
-            con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Connection con = getCon();
 
         int data_length = data.size();
         
@@ -93,20 +86,7 @@ public final class DB {
     }
 
     public static final ArrayList<String> getData(String tableName, String field){
-        Connection con = null;
-        //JDBCドライバロード
-        try{
-            Class.forName("org.sqlite.JDBC");
-        }catch(ClassNotFoundException e){
-            throw new IllegalStateException("ドライバのロードに失敗しました. ");
-        }
-
-        //データベース接続 & userTable作成
-        try {
-            con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Connection con = getCon();
 
         try{
             Statement stm = con.createStatement();
