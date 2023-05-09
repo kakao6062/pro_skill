@@ -1,16 +1,15 @@
 import java.sql.*;
 import java.util.ArrayList;
 
-class DB {
-    //接続用メンバ
-    public static Connection con = null;
+public final class DB {
 
-    /*
-     * データベースに接続し使えるようにする
-     * はじめに使用する必要あり
+    private DB() {}
+
+    /**
+     * tableNameという名前のtableを作る
      */
-    public static void initDB() {
-        
+    public static final void createTable(String tableName) {
+        Connection con = null;
         //JDBCドライバロード
         try{
             Class.forName("org.sqlite.JDBC");
@@ -21,23 +20,10 @@ class DB {
         //データベース接続 & userTable作成
         try {
             con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
-            Statement stm = con.createStatement();
-            stm.executeUpdate("CREATE TABLE IF NOT EXISTS user"
-                             +"("
-                             +"   name TEXT"
-                             +",  id   INT"
-                             +",  pass TEXT"
-                             +")");
-            stm.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
-    /*
-     * tableNameという名前のtableを作る
-     */
-    public static void createTable(String tableName) {
         try{
             //インスタンス生成
             Statement stm = con.createStatement();
@@ -46,7 +32,7 @@ class DB {
             String sql = "CREATE TABLE IF NOT EXISTS " + tableName
                         +"("
                         +"   id    INT"
-                        +",  tile  INT"
+                        +",  title  INT"
                         +",  genre TEXT"
                         +",  state TEXT"
                         +")";
@@ -61,14 +47,29 @@ class DB {
         }
     }
     
-    /*
+    /**
      * tableNameにvaluesの要素を挿入
      * valuesの長さが3か4でない場合はerrorとする
      */
-    public static void insertTable(String tableName, ArrayList<String> data) {
+    public static final void insertTable(String tableName, ArrayList<String> data) {
+        Connection con = null;
+        //JDBCドライバロード
+        try{
+            Class.forName("org.sqlite.JDBC");
+        }catch(ClassNotFoundException e){
+            throw new IllegalStateException("ドライバのロードに失敗しました. ");
+        }
+
+        //データベース接続 & userTable作成
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         int data_length = data.size();
         
-        if (data_length != 2 || data_length != 4){
+        if (data_length != 2 && data_length != 4){
             System.out.println("Error : 要素の長さが指定の長さではありません.");
             return;
         }
@@ -91,7 +92,22 @@ class DB {
         }
     }
 
-    public static ArrayList<String> getData(String tableName, String field){
+    public static final ArrayList<String> getData(String tableName, String field){
+        Connection con = null;
+        //JDBCドライバロード
+        try{
+            Class.forName("org.sqlite.JDBC");
+        }catch(ClassNotFoundException e){
+            throw new IllegalStateException("ドライバのロードに失敗しました. ");
+        }
+
+        //データベース接続 & userTable作成
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         try{
             Statement stm = con.createStatement();
             String sql = "SELECT " + field + " from " + tableName;
