@@ -4,8 +4,12 @@ import java.util.UUID;
 
 public final class DB {
 
+    //コンストラクタ (privateにすることでユーザ側のインスタンス生成を防止)
     private DB() {}
 
+    /**
+     * conを返す
+     */
     public static final Connection getCon() {
         Connection con = null;
         //JDBCドライバロード
@@ -20,6 +24,7 @@ public final class DB {
             con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
         } catch (SQLException e) {
             e.printStackTrace();
+            System.exit(0);
         }
         return con;
     }
@@ -59,6 +64,7 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
     
@@ -93,6 +99,7 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
@@ -111,6 +118,7 @@ public final class DB {
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
@@ -122,31 +130,37 @@ public final class DB {
 
         try{
             Statement stm = con.createStatement();
-            String sql = "drop table if exists '" + table + "';";
+            String sql = String.format("drop table if exists '%s';", table);
             stm.executeUpdate(sql);
 
             stm.close();
             con.close();
         }catch(SQLException e){
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
-    public static final ArrayList<String> getData(String tableName, String field){
+    /**
+     * tableNameからcolumnの値がvalueである全要素を取得
+     */
+    public static final ArrayList<String[]> getData(String tableName, String column, String value){
         Connection con = getCon();
+        ArrayList<String[]> rt = new ArrayList<>();
 
         try{
             Statement stm = con.createStatement();
-            String sql = "SELECT " + field + " from " + tableName;
+            String sql = String.format("select * from %s where %s = '%s';", tableName, column, value);
             ResultSet rs = stm.executeQuery(sql);
 
-            while (rs.next()) {
-                
+            while(rs.next()) {
+                String data_tmp[] = {rs.getString(1), rs.getString(2), rs.getString(3)};
+                rt.add(data_tmp);
             }
         }catch(SQLException e) {
-
+            e.printStackTrace();
+            System.exit(0);
         }
-        ArrayList<String> rt = new ArrayList<>();
         return rt;
     }
 }
