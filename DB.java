@@ -32,16 +32,24 @@ public final class DB {
         try{
             //インスタンス生成
             Statement stm = con.createStatement();
-
-            //命令をstring変数にべた書き
-            String sql = "CREATE TABLE IF NOT EXISTS " + tableName
-                        +"("
-                        +"   id    INT"
-                        +",  title  INT"
-                        +",  genre TEXT"
-                        +",  state TEXT"
-                        +")";
+            String sql;
             
+            //命令をstring変数にべた書き
+            if (tableName.equals("user")) {
+                sql = "CREATE TABLE IF NOT EXISTS " + tableName
+                            +"("
+                            +"   id   INT"
+                            +",  name TEXT"
+                            +",  pass TEXT"
+                            +")";
+            }else{
+                sql = "CREATE TABLE IF NOT EXISTS " + tableName
+                            +"("
+                            +"  title TEXT"
+                            +", genre TEXT"
+                            +", state TEXT"
+                            +")";
+            }
             //実行
             stm.executeUpdate(sql);
 
@@ -55,29 +63,29 @@ public final class DB {
     
     /**
      * tableNameにvaluesの要素を挿入
-     * valuesの長さが3か4でない場合はerrorとする
+     * valuesの長さが2か3でない場合はerrorとする
      */
     public static final void insertTable(String tableName, ArrayList<String> data) {
         Connection con = getCon();
 
         int data_length = data.size();
         
-        if (data_length != 2 && data_length != 4){
+        if (data_length != 2 && data_length != 3){
             System.out.println("Error : 要素の長さが指定の長さではありません.");
             return;
         }
 
         try{
-            String data_value = "";
+            String data_value;
 
             if (data_length == 2) {
-                data_value = "'" + data.get(0) +"'" + ", " + "CONVERT(INT, CONVERT(VARBINARY(4), NEWID)), " + "'" + data.get(1) + "'";
+                data_value = String.format("CONVERT(INT, CONVERT(VARBINARY(4), NEWID)), '%s', '%s'", data.get(0), data.get(1));
             }else {
-                data_value = data.get(0) + ", " + "'" + data.get(1) + "', " + "'" + data.get(2) + "', "+ "'" + data.get(3) + "'";
+                data_value = String.format("'%s', '%s', '%s'", data.get(0), data.get(1), data.get(2));
             }
 
             Statement stm = con.createStatement();
-            String sql = "INSERT INTO " + tableName + " values(" + data_value + ");";
+            String sql = String.format("insert into '%s' values(%s);", tableName, data_value);
             stm.executeUpdate(sql);
             stm.close();
             con.close();
