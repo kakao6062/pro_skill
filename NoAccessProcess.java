@@ -1,6 +1,13 @@
 import java.util.ArrayList;
 
 public class NoAccessProcess implements Process{
+    //singleton
+    private static NoAccessProcess process = new NoAccessProcess();
+    private NoAccessProcess(){}
+    public static NoAccessProcess getProcess() {
+        return process;
+    }
+
     void printMsg(){
         System.out.println("アクセス権がありません");
     }
@@ -19,7 +26,6 @@ public class NoAccessProcess implements Process{
     public void deleteColumn(String title){
         printMsg();        
     }
-
 
     //作品一覧を返すメソッド
     public ArrayList<String> getList(String state){

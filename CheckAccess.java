@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
-interface CheckAccess{
+class CheckAccess{
     public void check(String username, String pass){
         ArrayList<String> data = DB.getData("user", username);
-        int passwd_idx;
+        ProcessPattern process = new ProcessPattern();
+        int passwd_idx = ;
         if(pass.equals(data(passwd_idx))){
-            changePattern(HasAccessProcess);
+            process.changeToAccess();
             return;
         }
-        changePattern(NoAccessProcess);
+        process.chageToNoAccess();
     }
 }

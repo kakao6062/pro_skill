@@ -3,8 +3,14 @@ import java.util.ArrayList;
 public class ProcessPattern {
     private Process process = null;
 
-    public void changePattern(Process process){
-        this.process = process;
+    public ProcessPattern(){}
+
+    public void changeToAccess(){
+        this.process = HasAccessProcess.getProcess();
+    }
+
+    public void chageToNoAccess(){
+        this.process = NoAccessProcess.getProcess();
     }
 
     public void update(String table, String column, String after, String text, String value){

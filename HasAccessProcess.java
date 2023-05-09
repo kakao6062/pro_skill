@@ -2,6 +2,12 @@ import java.util.ArrayList;
 import java.sql.*;
 
 public class HasAccessProcess implements Process{
+    //singleton
+    private static HasAccessProcess process = new HasAccessProcess();
+    private HasAccessProcess(){}
+    public static HasAccessProcess getProcess() {
+        return process;
+    }
 
     //状態変更のメソッド
     public void update(String table, String column, String after, String text, String value){
