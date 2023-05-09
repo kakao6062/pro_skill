@@ -3,12 +3,12 @@ import java.util.ArrayList;
 public class ProcessPattern {
     private Process process = null;
 
-    private void changePattern(Process process){
+    public void changePattern(Process process){
         this.process = process;
     }
 
-    public void update(String state){
-        this.process.update(state);
+    public void update(String table, String column, String after, String text, String value){
+        this.process.update(table, column, after, text, value);
     }
 
     public void addColumn(String title, String state){
