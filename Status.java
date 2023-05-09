@@ -3,7 +3,5 @@ class Status {
 
     private void changeStatus(Status s){
         this.status = s;
-    }
-
-    
+    } 
 }

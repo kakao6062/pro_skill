@@ -1,4 +1,4 @@
 interface Genre{
     // don't use
-    public getList();
+    // public getList();
 }

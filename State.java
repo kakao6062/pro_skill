@@ -1,5 +1,5 @@
 interface State{
     // don't use
-    public getList();
+    // public getList();
 
 }
