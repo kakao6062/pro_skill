@@ -1,9 +1,5 @@
-import java.util.ArrayList;
+import java.util.*;
 
-interface CheckAccess{
-    public void changeState(String state);
-
-    public void addColumn(String title, String state);
-
-    public ArrayList<String> getList(String state);
+public class CheckAccess{
+    
 }

@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class NoAccess implements CheckAccess{
+public class NoAccessProcess implements Process{
     void printMsg(){
         System.out.println("アクセス権がありません");
     }
 
     //状態変更のメソッド
-    public void changeState(String state){
+    public void update(String state){
         printMsg();
     }
 

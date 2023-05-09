@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.sql.*;
 
-public class HasAccess implements CheckAccess{
+public class HasAccessProcess implements Process{
 
     //状態変更のメソッド
-    public void changeState(String state){
+    public void update(String state){
 
     }
 
@@ -14,7 +15,7 @@ public class HasAccess implements CheckAccess{
 
     //カラム削除のメソッド
     public void deleteColumn(String title){
-        
+        PreparedStatement ps = con.preparedStatement("delete from ");
     }
 
     //作品一覧を返すメソッド
