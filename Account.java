@@ -1,9 +1,9 @@
 public class Account {
-    int ID;
+    String ID;
     String username;
     String pass;//パスワード
 
-    Account(int ID,String username,String pass){
+    Account(String ID,String username,String pass){
         this.ID=ID;
         this.username=username;
         this.pass=pass;
@@ -12,7 +12,7 @@ public class Account {
      * IDを取得するメソッド
      * @return ID
      */
-    public int getID(){
+    public String getID(){
         return ID;
     }
     /**
@@ -31,9 +31,10 @@ public class Account {
     }
     /**
      * パスワードを設定、変更するメソッド
-     * @param newPass 新しいパスワード
+     * @param ID 変更するアカウントのID
+     * @param NewPass 新しいパスワード
      */
-    public void setPass(String newPass){
-        pass=newPass;
+    public void setPass(String NewPass,String ID){
+        DB.updateData("user","pass", NewPass, "ID", ID);
     }
 }
