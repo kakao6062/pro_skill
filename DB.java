@@ -94,7 +94,7 @@ public final class DB {
 
         try {
             Statement stm = con.createStatement();
-            String sql = "update " + table + " set " + column + " = '" + after + "' where " + text + " = '"+ value + "';";
+            String sql = String.format("update %s set %s = '%s' where %s = '%s';", table, column, after, text, value);
             System.out.println(sql);
             stm.executeUpdate(sql);
 

@@ -4,12 +4,8 @@ import java.sql.*;
 public class HasAccessProcess implements Process{
 
     //状態変更のメソッド
-    public void update(String title, String state){
-        Connection con = DB.getCon();
+    public void update(String table, String column, String after, String text, String value){
         
-        try{PreparedStatement ps = con.prepareStatement(
-            String.format("UPDATE table SET title = %s WHERE state = %s", title, state));
-        }
     }
 
     //カラム追加のメソッド
