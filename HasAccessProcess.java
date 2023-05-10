@@ -29,10 +29,18 @@ public class HasAccessProcess implements Process{
     }
 
     /**
-     * 作品一覧を返すメソッド
+     * 情報を返すメソッド
      */
-    public ArrayList<String[]> getList(String tableName, String column, String value){
+    public ArrayList<String[]> getData(String tableName, String column, String value){
         return DB.getData(tableName, column, value);
     }
 
+    /**
+     * パスワードを設定、変更するメソッド
+     * @param ID 変更するアカウントのID
+     * @param NewPass 新しいパスワード
+     */
+    public void setPass(String NewPass,String ID){
+        DB.updateData("user","pass", NewPass, "ID", ID);
+    }
 }
