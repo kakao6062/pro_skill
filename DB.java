@@ -142,6 +142,24 @@ public final class DB {
     }
 
     /**
+     * tableNameのcolumnがvalueである行を削除
+     */
+    public static final void deleteLow(String tableName, String column, String value) {
+        Connection con = getCon();
+        try{
+            Statement stm = con.createStatement();
+            String sql = String.format("DELETE FROM %s WHERE %s = '%s';", tableName, column, value);
+            stm.executeUpdate(sql);
+
+            stm.close();
+            con.close();
+        }catch(SQLException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    /**
      * tableNameからcolumnの値がvalueである全要素を取得
      */
     public static final ArrayList<String[]> getData(String tableName, String column, String value){
@@ -157,6 +175,9 @@ public final class DB {
                 String data_tmp[] = {rs.getString(1), rs.getString(2), rs.getString(3)};
                 rt.add(data_tmp);
             }
+
+            stm.close();
+            con.close();
         }catch(SQLException e) {
             e.printStackTrace();
             System.exit(0);
