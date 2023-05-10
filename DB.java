@@ -24,7 +24,6 @@ public final class DB {
             con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.exit(0);
         }
         return con;
     }
@@ -45,7 +44,7 @@ public final class DB {
                 sql = "CREATE TABLE IF NOT EXISTS " + tableName
                             +"("
                             +"   id   TEXT"
-                            +",  name TEXT"
+                            +",  name TEXT UNIQUE"
                             +",  pass TEXT"
                             +")";
             }else{
@@ -64,22 +63,22 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
-            System.exit(0);
         }
     }
     
     /**
      * tableNameにvaluesの要素を挿入
      * valuesの長さが2か3でない場合はerrorとする
+     * @return -1 : error, 0 : no problem  
      */
-    public static final void insertTable(String tableName, ArrayList<String> data) {
+    public static final int insertRow(String tableName, ArrayList<String> data) {
         Connection con = getCon();
 
         int data_length = data.size();
         
         if (data_length != 2 && data_length != 3){
             System.out.println("Error : 要素の長さが指定の長さではありません.");
-            return;
+            return -1;
         }
 
         try{
@@ -99,8 +98,9 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
-            System.exit(0);
+            return -1;
         }
+        return 0;
     }
 
     /**
@@ -118,7 +118,6 @@ public final class DB {
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
-            System.exit(0);
         }
     }
 
@@ -137,14 +136,13 @@ public final class DB {
             con.close();
         }catch(SQLException e){
             e.printStackTrace();
-            System.exit(0);
         }
     }
 
     /**
      * tableNameのcolumnがvalueである行を削除
      */
-    public static final void deleteLow(String tableName, String column, String value) {
+    public static final void deleteRow(String tableName, String column, String value) {
         Connection con = getCon();
         try{
             Statement stm = con.createStatement();
@@ -155,7 +153,6 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
-            System.exit(0);
         }
     }
 
@@ -180,7 +177,6 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
-            System.exit(0);
         }
         return rt;
     }
