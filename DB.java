@@ -104,14 +104,21 @@ public final class DB {
     }
 
     /**
-     * tableのtextがvalueである行のcolumnの値をafterに変更
+     * tableNameのcolumnがbeforeValueである行の決められた値をafterに変更
+     * tableName == user -> passにbeforeValue
+     * tableName != user -> stateに
      */
-    public static final void updateData(String table, String column, String after, String text, String value){
+    public static final void updateData(String tableName, String afterValue, String column,String beforeValue){
         Connection con = getCon();
 
         try {
             Statement stm = con.createStatement();
-            String sql = String.format("update %s set %s = '%s' where %s = '%s';", table, column, after, text, value);
+            String sql;
+            if (tableName.equals("user")){
+                sql = String.format("update user set pass = '%s' where %s = '%s';", afterValue, column, beforeValue);
+            }else{
+                sql = String.format("update %s set state = '%s' where %s = '%s';", tableName, afterValue, column, beforeValue);
+            }
             stm.executeUpdate(sql);
 
             stm.close();
