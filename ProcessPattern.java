@@ -29,7 +29,11 @@ public class ProcessPattern {
         this.process.deleteTable(table);
     }
 
-    public ArrayList<String[]> getList(String tableName, String column, String value){
-        return this.process.getList(tableName, column, value);
+    public ArrayList<String[]> getData(String tableName, String column, String value){
+        return this.process.getData(tableName, column, value);
+    }
+
+    public void setPass(String NewPass,String ID){
+        this.process.setPass(NewPass, ID);
     }
 }

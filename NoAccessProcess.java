@@ -33,9 +33,12 @@ public class NoAccessProcess implements Process{
     }
 
     //作品一覧を返すメソッド
-    public ArrayList<String[]> getList(String tableName, String column, String value){
+    public ArrayList<String[]> getData(String tableName, String column, String value){
         printMsg();
         return null;
     }
 
+    public void setPass(String NewPass,String ID){
+        printMsg();
+    }
 }

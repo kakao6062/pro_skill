@@ -9,5 +9,7 @@ interface Process{
     
     public void deleteTable(String table);
 
-    public ArrayList<String[]> getList(String tableName, String column, String value);
+    public ArrayList<String[]> getData(String tableName, String column, String value);
+
+    public void setPass(String NewPass,String ID);
 }
