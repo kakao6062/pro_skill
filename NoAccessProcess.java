@@ -18,7 +18,7 @@ public class NoAccessProcess implements Process{
     }
 
     //カラム追加のメソッド
-    public void addColumn(String title, String state){
+    public void addColumn(String tableName, ArrayList<String> data){
         printMsg();
     }
 
@@ -26,9 +26,14 @@ public class NoAccessProcess implements Process{
     public void deleteColumn(String title){
         printMsg();        
     }
+    
+    //delete table
+    public void deleteTable(String table){
+        printMsg();
+    }
 
     //作品一覧を返すメソッド
-    public ArrayList<String> getList(String state){
+    public ArrayList<String[]> getList(String tableName, String column, String value){
         printMsg();
         return null;
     }

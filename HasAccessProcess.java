@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.sql.*;
 
 public class HasAccessProcess implements Process{
     //singleton
@@ -15,18 +14,24 @@ public class HasAccessProcess implements Process{
     }
 
     //カラム追加のメソッド
-    public void addColumn(String title, String state){
+    public void addColumn(String tableName, ArrayList<String> data){
+        DB.insertTable(tableName, data);
     }
 
-    //カラム削除のメソッド
+    //行削除のメソッド
     public void deleteColumn(String title){
+    }
+
+    //delete table
+    public void deleteTable(String table){
+        DB.deleteTable(table);
     }
 
     /**
      * 作品一覧を返すメソッド
      */
-    public ArrayList<String> getList(String state){
-        return DB.getData();
+    public ArrayList<String[]> getList(String tableName, String column, String value){
+        return DB.getData(tableName, column, value);
     }
 
 }
