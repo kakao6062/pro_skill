@@ -17,12 +17,12 @@ public class ProcessPattern {
         this.process.update(table, column, after, text, value);
     }
 
-    public void addColumn(String tableName, ArrayList<String> data){
-        this.process.addColumn(tableName, data);
+    public void addRow(String tableName, ArrayList<String> data){
+        this.process.addRow(tableName, data);
     }
 
-    public void deleteColumn(String title){
-        this.process.deleteColumn(title);
+    public void deleteRow(String tableName, String column, String value){
+        this.process.deleteRow(tableName, column, value);;
     }
     
     public void deleteTable(String table){

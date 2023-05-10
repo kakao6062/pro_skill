@@ -14,12 +14,13 @@ public class HasAccessProcess implements Process{
     }
 
     //カラム追加のメソッド
-    public void addColumn(String tableName, ArrayList<String> data){
-        DB.insertTable(tableName, data);
+    public void addRow(String tableName, ArrayList<String> data){
+        DB.insertRow(tableName, data);
     }
 
     //行削除のメソッド
-    public void deleteColumn(String title){
+    public void deleteRow(String tableName, String column, String value){
+        DB.deleteRow(tableName, column, value);
     }
 
     //delete table
