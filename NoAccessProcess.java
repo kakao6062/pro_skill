@@ -18,12 +18,12 @@ public class NoAccessProcess implements Process{
     }
 
     //カラム追加のメソッド
-    public void addColumn(String tableName, ArrayList<String> data){
+    public void addRow(String tableName, ArrayList<String> data){
         printMsg();
     }
 
-    //カラム削除のメソッド
-    public void deleteColumn(String title){
+    //行削除のメソッド
+    public void deleteRow(String tableName, String column, String value){
         printMsg();        
     }
     
