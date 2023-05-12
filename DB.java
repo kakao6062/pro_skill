@@ -50,7 +50,7 @@ public final class DB {
             }else{
                 sql = "CREATE TABLE IF NOT EXISTS " + tableName
                             +"("
-                            +"  title TEXT"
+                            +"  title TEXT UNIQUE"
                             +", genre TEXT"
                             +", state TEXT"
                             +")";
@@ -104,20 +104,26 @@ public final class DB {
     }
 
     /**
-     * tableNameのcolumnがbeforeValueである行の決められた値をafterに変更
-     * tableName == user -> passにbeforeValue
-     * tableName != user -> stateに
+     * tableNameのkeyがある行の決められた値をafterに変更
+     * keyを次のように設定すること．
+     *   
+     * tableName == user -> key = name
+     * tableName != user -> key = title
      */
-    public static final void updateData(String tableName, String afterValue, String column,String beforeValue){
+    public static final void updateData(String tableName, String key, String after){
         Connection con = getCon();
 
         try {
             Statement stm = con.createStatement();
             String sql;
+            ArrayList<String[]> data_tmp;
+
             if (tableName.equals("user")){
-                sql = String.format("update user set pass = '%s' where %s = '%s';", afterValue, column, beforeValue);
+                data_tmp = getData(tableName, "name", key);
+                sql = String.format("update user set pass = '%s' where name = '%s';", after, data_tmp.get(0)[1]);
             }else{
-                sql = String.format("update %s set state = '%s' where %s = '%s';", tableName, afterValue, column, beforeValue);
+                data_tmp = getData(tableName, "title", key);
+                sql = String.format("update %s set state = '%s' where title = '%s';", tableName, after, data_tmp.get(0)[0]);
             }
             stm.executeUpdate(sql);
 
