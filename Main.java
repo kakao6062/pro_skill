@@ -25,19 +25,21 @@ public class Main{
         DB.createTable(table);
     }
 
+    /**
+     * 視聴状況の更新
+     */
     public void update(){
         Scanner sc = new Scanner(System.in);
         String username = checkAccess();
         ProcessPattern pro = new ProcessPattern();
-        ArrayList<String[]> data = pro.getData("user", "name", username);
-        //tableのtitleがvalueである行のcolumnの値をafterに変更
-        String title = sc.next();
-        pro.update(, , );
+        System.out.println("更新内容を入力");
+        String after = sc.next();
+        String id = pro.getData("user", "name", username).get(0)[0];
+        pro.update(id, "state", after);
     }
 
     /**
      * get works list that entered state
-     * @return 
      */
     public void getList(){
         Scanner sc = new Scanner(System.in);
@@ -61,6 +63,11 @@ public class Main{
     }
 
     public void setPass(){
-
+        Scanner sc = new Scanner(System.in);
+        String username = checkAccess();
+        ProcessPattern pro = new ProcessPattern();
+        System.out.println("更新内容を入力");
+        String after = sc.next();
+        pro.update("user", "pass", after);
     }
 }

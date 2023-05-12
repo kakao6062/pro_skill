@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class CheckAccess{
+public final class CheckAccess{
     private CheckAccess(){}
     public static void check(String username, String pass){
         ArrayList<String[]> data = DB.getData("user", "name", username);

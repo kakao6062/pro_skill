@@ -13,8 +13,8 @@ public class ProcessPattern {
         this.process = NoAccessProcess.getProcess();
     }
 
-    public void update(String table, String column, String after, String text, String value){
-        this.process.update(table, column, after, text, value);
+    public void update(String table, String key, String after){
+        this.process.update(table, key, after);
     }
 
     public void deleteTable(String table){
@@ -32,8 +32,6 @@ public class ProcessPattern {
     public void insertRow(String tableName, ArrayList<String> data){
         this.process.insertRow(tableName, data);
     }
-
-    
 
     public void setPass(String NewPass,String ID){
         this.process.setPass(NewPass, ID);
