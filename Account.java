@@ -35,6 +35,6 @@ public class Account {
      * @param NewPass 新しいパスワード
      */
     public void setPass(String NewPass,String ID){
-        DB.updateData("user","pass", NewPass, "ID", ID);
+        DB.updateData("user", "pass", NewPass);
     }
 }
