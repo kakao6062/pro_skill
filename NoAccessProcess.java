@@ -12,30 +12,26 @@ public class NoAccessProcess implements Process{
         System.out.println("アクセス権がありません");
     }
 
-    //状態変更のメソッド
     public void update(String table, String column, String after, String text, String value){
         printMsg();
     }
 
-    //カラム追加のメソッド
-    public void addRow(String tableName, ArrayList<String> data){
-        printMsg();
-    }
-
-    //行削除のメソッド
-    public void deleteRow(String tableName, String column, String value){
-        printMsg();        
-    }
-    
     //delete table
     public void deleteTable(String table){
         printMsg();
     }
+    
+    public void deleteRow(String tableName, String column, String value){
+        printMsg();        
+    }
 
-    //作品一覧を返すメソッド
     public ArrayList<String[]> getData(String tableName, String column, String value){
         printMsg();
         return null;
+    }
+    
+    public void insertRow(String tableName, ArrayList<String> data){
+        printMsg();
     }
 
     public void setPass(String NewPass,String ID){
