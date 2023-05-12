@@ -12,7 +12,7 @@ public class NoAccessProcess implements Process{
         System.out.println("アクセス権がありません");
     }
 
-    public void update(String table, String column, String after, String text, String value){
+    public void update(String table, String key, String after){
         printMsg();
     }
 

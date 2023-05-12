@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 interface Process{
-    public void update(String table, String column, String after, String text, String value);
+    public void update(String table, String key, String after);
 
     public void deleteTable(String table);
 
