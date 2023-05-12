@@ -9,12 +9,12 @@ public class HasAccessProcess implements Process{
     }
 
     //状態変更のメソッド
-    public void update(String table, String column, String after, String text, String value){
-        DB.updateData(table, column, after, text, value);
+    public void update(String table, String after, String column){
+        DB.updateData(table, after, column);
     }
 
     //カラム追加のメソッド
-    public void addRow(String tableName, ArrayList<String> data){
+    public void insertRow(String tableName, ArrayList<String> data){
         DB.insertRow(tableName, data);
     }
 
@@ -41,6 +41,6 @@ public class HasAccessProcess implements Process{
      * @param NewPass 新しいパスワード
      */
     public void setPass(String NewPass,String ID){
-        DB.updateData("user","pass", NewPass, "ID", ID);
+        DB.updateData("user", NewPass, "pass");
     }
 }
