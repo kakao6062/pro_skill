@@ -9,6 +9,7 @@ public final class DB {
 
     /**
      * conを返す
+     * @return con
      */
     public static final Connection getCon() {
         Connection con = null;
@@ -19,7 +20,7 @@ public final class DB {
             throw new IllegalStateException("ドライバのロードに失敗しました. ");
         }
 
-        //データベース接続 & userTable作成
+        //データベース接続
         try {
             con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
         } catch (SQLException e) {
@@ -68,8 +69,7 @@ public final class DB {
     
     /**
      * tableNameにvaluesの要素を挿入
-     * valuesの長さが2か3でない場合はerrorとする
-     * @return -1 : error, 0 : no problem  
+     * @return {@code 0} no errors {@code -1} error
      */
     public static final int insertRow(String tableName, ArrayList<String> data) {
         Connection con = getCon();
@@ -104,11 +104,13 @@ public final class DB {
     }
 
     /**
-     * tableNameのkeyがある行の決められた値をafterに変更
-     * keyを次のように設定すること．
-     *   
-     * tableName == user -> key = name
-     * tableName != user -> key = title
+     * tableNameのkeyがある行の決められた値をafterに変更<br>
+     * <br>
+     * keyを次のように設定<br>
+     * <br>
+     * {@code tableName == user} -> key = nameの任意の値<br>
+     * <br>
+     * {@code tableName != user} -> key = titleの任意の値
      */
     public static final void updateData(String tableName, String key, String after){
         Connection con = getCon();
@@ -135,14 +137,14 @@ public final class DB {
     }
 
     /**
-     * tableを削除
+     * tableNameを削除
      */
-    public static void deleteTable(String table) {
+    public static void deleteTable(String tableName) {
         Connection con = getCon();
 
         try{
             Statement stm = con.createStatement();
-            String sql = String.format("drop table if exists '%s';", table);
+            String sql = String.format("drop table if exists '%s';", tableName);
             stm.executeUpdate(sql);
 
             stm.close();
