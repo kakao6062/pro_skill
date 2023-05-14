@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class HasAccessProcess implements Process{
+public non-sealed class HasAccessProcess implements Process{
     //singleton
     private static HasAccessProcess process = new HasAccessProcess();
     private HasAccessProcess(){}

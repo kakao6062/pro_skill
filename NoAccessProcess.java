@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class NoAccessProcess implements Process{
+public non-sealed class NoAccessProcess implements Process{
     //singleton
     private static NoAccessProcess process = new NoAccessProcess();
     private NoAccessProcess(){}

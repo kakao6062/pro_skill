@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-interface Process{
+sealed interface Process permits HasAccessProcess, NoAccessProcess{
     public void update(String table, String key, String after);
 
     public void deleteTable(String table);
