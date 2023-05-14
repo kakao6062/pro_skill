@@ -1,6 +1,11 @@
 import java.util.*;
 
 class Integration {
+    public static void main(String[] args) {
+        Integration integration = new Integration();
+        integration.process();
+    }
+
     private String name;
     private String pass;
     private ProcessPattern pp = null;
