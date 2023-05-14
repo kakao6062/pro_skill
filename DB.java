@@ -25,6 +25,7 @@ public final class DB {
             con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
         } catch (SQLException e) {
             e.printStackTrace();
+            System.exit(0);
         }
         return con;
     }
@@ -64,6 +65,7 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
     
@@ -97,7 +99,6 @@ public final class DB {
             stm.close();
             con.close();
         }catch(SQLException e) {
-            e.printStackTrace();
             return -1;
         }
         return 0;
@@ -133,6 +134,7 @@ public final class DB {
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
@@ -151,6 +153,7 @@ public final class DB {
             con.close();
         }catch(SQLException e){
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
@@ -168,6 +171,7 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
@@ -181,6 +185,7 @@ public final class DB {
         try{
             Statement stm = con.createStatement();
             String sql = String.format("select * from %s where %s = '%s';", tableName, column, value);
+            System.out.println(sql);
             ResultSet rs = stm.executeQuery(sql);
 
             while(rs.next()) {
@@ -192,6 +197,7 @@ public final class DB {
             con.close();
         }catch(SQLException e) {
             e.printStackTrace();
+            System.exit(0);
         }
         return rt;
     }

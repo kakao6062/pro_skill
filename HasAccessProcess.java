@@ -14,8 +14,8 @@ public non-sealed class HasAccessProcess implements Process{
     }
 
     //カラム追加のメソッド
-    public void insertRow(String tableName, ArrayList<String> data){
-        DB.insertRow(tableName, data);
+    public int insertRow(String tableName, ArrayList<String> data){
+        return DB.insertRow(tableName, data);
     }
 
     //行削除のメソッド

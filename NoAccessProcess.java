@@ -30,8 +30,9 @@ public non-sealed class NoAccessProcess implements Process{
         return null;
     }
     
-    public void insertRow(String tableName, ArrayList<String> data){
+    public int insertRow(String tableName, ArrayList<String> data){
         printMsg();
+        return -1;
     }
 
     public void setPass(String NewPass,String ID){
