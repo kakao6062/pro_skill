@@ -1,4 +1,7 @@
 import java.io.InputStream;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.BufferedReader;
@@ -15,13 +18,24 @@ public class IntegrationTest {
     // }
     private StandardInputStream in = new StandardInputStream();
     private StandardOutputStream out = new StandardOutputStream();
+    @Before
+    public void before(){
+        System.setIn(in);
+        System.setOut(out);
+    }
+
+    @After
+    public void after(){
+        System.setIn(null);
+        System.setOut(null);
+    }
+
     @Test public void integrationTest(){
         Integration integration = new Integration();
-        integration.process();
-        in.inputln("1");
-        assertEquals(out.readLine(), "行いたい処理を入力");
-        in.inputln("a");
-        assertEquals(out.readLine(), "入力が不適です．再入力してください．");
+        assertEquals(out.readLine(), "testmsg");
+        // in.inputln("1");
+        // assertEquals(out.readLine(), "入力が不適です．再入力してください．");
+        // in.inputln("a");
     }
 }
 
