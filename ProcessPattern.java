@@ -29,8 +29,9 @@ public class ProcessPattern {
         return this.process.getData(tableName, column, value);
     }
 
-    public void insertRow(String tableName, ArrayList<String> data){
+    public int insertRow(String tableName, ArrayList<String> data){
         this.process.insertRow(tableName, data);
+        return 0;
     }
 
     public void setPass(String NewPass,String ID){
