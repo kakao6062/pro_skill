@@ -24,6 +24,7 @@ class Integration {
             
             System.out.print("> ");
             select = sc.nextInt();
+            System.out.println();
 
             switch (select) {
                 case 1: registrationUser();
@@ -34,6 +35,7 @@ class Integration {
                 default:System.out.println("入力が不適です．再入力してください．");
                     break;
             }
+            System.out.println();
         }
         flag = true;
         while(flag) {
@@ -46,6 +48,7 @@ class Integration {
             System.out.println("0: 終了");
             System.out.print("> ");
             select = sc.nextInt();
+            System.out.println();
 
             switch (select) {
                 case 1: add();       break;
@@ -57,6 +60,7 @@ class Integration {
                 default:System.out.println("入力が不適です．再入力してください．");
                         break;
             }
+            System.out.println();
         }
     }
 
@@ -149,6 +153,7 @@ class Integration {
         check(name, pass);
         System.out.print("取得したいリストの種類を選択\n1: ジャンル\n2: 視聴状況\n> ");
         int choice = sc.nextInt();
+        System.out.println();
         String column;
         if(choice == 1){
             column = "genre";
@@ -157,6 +162,7 @@ class Integration {
         }
         System.out.print("ジャンルまたは視聴状況を入力 > ");
         String key = sc.next();
+        System.out.println();
         ArrayList<String[]> list = pp.getData(name, column, key);
         for(String[] s : list){
             System.out.println(String.format("%15s %s", s[0], s[choice]));
