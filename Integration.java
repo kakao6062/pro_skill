@@ -11,6 +11,9 @@ class Integration {
     private ProcessPattern pp = null;
     private Scanner sc = new Scanner(System.in);
 
+    /**
+     * 対話処理本体
+     */
     public void process() {
         int select;
         boolean flag = true;
@@ -64,6 +67,9 @@ class Integration {
         }
     }
 
+    /**
+     * ユーザ登録を行う
+     */
     private void registrationUser() {
         int error = -1;
         
@@ -85,6 +91,9 @@ class Integration {
         }        
     }
 
+    /**
+     * 登録済みユーザのログインを行う
+     */
     private void login(){
         System.out.print("名前を入力 > ");
         name = sc.next();
@@ -118,6 +127,9 @@ class Integration {
         }
     }
 
+    /**
+     * 視聴リストに項目を追加する
+     */
     private void add() {
         ArrayList<String> data = new ArrayList<>();
         System.out.print("作品名を入力 > ");
@@ -147,7 +159,7 @@ class Integration {
     }
 
     /**
-     * get works list that entered state
+     * 視聴リストの表示
      */
     private void getList(){
         check(name, pass);
@@ -169,6 +181,9 @@ class Integration {
         }
     }
 
+    /**
+     * パスワード更新
+     */
     private void setPass(){
         check(name, pass);
         System.out.print("更新後のパスワードを入力 > ");
