@@ -185,7 +185,6 @@ public final class DB {
         try{
             Statement stm = con.createStatement();
             String sql = String.format("select * from %s where %s = '%s';", tableName, column, value);
-            System.out.println(sql);
             ResultSet rs = stm.executeQuery(sql);
 
             while(rs.next()) {
