@@ -12,10 +12,11 @@ class Integration {
     private Scanner sc = new Scanner(System.in);
 
     public void process() {
-        int select = 100;
+        int select;
+        boolean flag = true;
         DB.createTable("user");
 
-        while (select != -1) {
+        while (flag) {
             System.out.println("行いたい処理を入力");
             System.out.println("1: 登録");
             System.out.println("2: ログイン");
@@ -26,18 +27,16 @@ class Integration {
 
             switch (select) {
                 case 1: registrationUser();
-                        select = -1;        break;
+                        flag = false;        break;
                 case 2: login();
-                        select = -1;        break;
+                        flag = false;        break;
                 case 0:return;
                 default:System.out.println("入力が不適です．再入力してください．");
                     break;
             }
         }
-
-        select = 100;
-
-        while(select != -1) {
+        flag = true;
+        while(flag) {
             System.out.println("行いたい処理を入力");
             System.out.println("1: リストの追加");
             System.out.println("2: リストの更新");
@@ -49,11 +48,11 @@ class Integration {
             select = sc.nextInt();
 
             switch (select) {
-                case 1: add();      break;
-                case 2: update();   break;
-                case 3: getList();  break;
-                case 4: update();   break;
-                case 5: setPass();  break;
+                case 1: add();       break;
+                case 2: update();    break;
+                case 3: getList();   break;
+                case 4: update();    break;
+                case 5: setPass();   break;
                 case 0: return;
                 default:System.out.println("入力が不適です．再入力してください．");
                         break;
@@ -91,7 +90,6 @@ class Integration {
             System.out.println("ログイン完了");
             check(name, pass);
         }else{
-            System.out.println("パスワードエラー");
             login();
         }
     }
@@ -101,13 +99,17 @@ class Integration {
         if (pp == null) {
             pp = new ProcessPattern();
         }
-
+        if(data.size()==0){
+            System.out.println("そのような名前は登録されていません");
+            return false;
+        }
         int passwd_idx = 2;
         if(pass.equals(data.get(0)[passwd_idx])){
             pp.changeToAccess();
             return true;
         }else{
             pp.chageToNoAccess();
+            System.out.println("パスワードエラー");
             return false;
         }
     }
@@ -153,7 +155,7 @@ class Integration {
         } else {
             column = "state";
         }
-        System.out.print("作品名を入力 > ");
+        System.out.print("ジャンルまたは視聴状況を入力 > ");
         String key = sc.next();
         ArrayList<String[]> list = pp.getData(name, column, key);
         for(String[] s : list){
