@@ -22,7 +22,7 @@ public final class DB {
 
         //データベース接続
         try {
-            con = DriverManager.getConnection("jdbc:sqlite:./DataBase.db");
+            con = DriverManager.getConnection("jdbc:sqlite:./worksmanager.db");
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(0);
@@ -113,7 +113,7 @@ public final class DB {
      * <br>
      * {@code tableName != user} -> key = titleの任意の値
      */
-    public static final void updateData(String tableName, String key, String after){
+    public static final int updateData(String tableName, String key, String after){
         Connection con = getCon();
 
         try {
@@ -132,9 +132,9 @@ public final class DB {
 
             stm.close();
             con.close();
+            return 0;
         } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(0);
+            return -1;
         }
     }
 
